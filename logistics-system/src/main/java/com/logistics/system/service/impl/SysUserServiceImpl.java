@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Validator;
 
-import com.logistics.system.domain.SysPost;
 import com.logistics.system.domain.SysUserPost;
 import com.logistics.system.domain.SysUserRole;
 import com.logistics.system.service.ISysConfigService;
@@ -25,7 +24,6 @@ import com.logistics.common.utils.SecurityUtils;
 import com.logistics.common.utils.StringUtils;
 import com.logistics.common.utils.bean.BeanValidators;
 import com.logistics.common.utils.spring.SpringUtils;
-import com.logistics.system.mapper.SysPostMapper;
 import com.logistics.system.mapper.SysRoleMapper;
 import com.logistics.system.mapper.SysUserMapper;
 import com.logistics.system.mapper.SysUserPostMapper;
@@ -46,9 +44,6 @@ public class SysUserServiceImpl implements ISysUserService
 
     @Autowired
     private SysRoleMapper roleMapper;
-
-    @Autowired
-    private SysPostMapper postMapper;
 
     @Autowired
     private SysUserRoleMapper userRoleMapper;
@@ -147,22 +142,6 @@ public class SysUserServiceImpl implements ISysUserService
         return list.stream().map(SysRole::getRoleName).collect(Collectors.joining(","));
     }
 
-    /**
-     * 查询用户所属岗位组
-     * 
-     * @param userName 用户名
-     * @return 结果
-     */
-    @Override
-    public String selectUserPostGroup(String userName)
-    {
-        List<SysPost> list = postMapper.selectPostsByUserName(userName);
-        if (CollectionUtils.isEmpty(list))
-        {
-            return StringUtils.EMPTY;
-        }
-        return list.stream().map(SysPost::getPostName).collect(Collectors.joining(","));
-    }
 
     /**
      * 校验用户名称是否唯一
