@@ -19,7 +19,6 @@ import com.logistics.common.core.controller.BaseController;
 import com.logistics.common.core.domain.AjaxResult;
 import com.logistics.common.core.page.TableDataInfo;
 import com.logistics.common.enums.BusinessType;
-import com.logistics.common.utils.poi.ExcelUtil;
 import com.logistics.system.domain.SysConfig;
 import com.logistics.system.service.ISysConfigService;
 
@@ -47,15 +46,6 @@ public class SysConfigController extends BaseController
         return getDataTable(list);
     }
 
-    @Log(title = "参数管理", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('system:config:export')")
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, SysConfig config)
-    {
-        List<SysConfig> list = configService.selectConfigList(config);
-        ExcelUtil<SysConfig> util = new ExcelUtil<SysConfig>(SysConfig.class);
-        util.exportExcel(response, list, "参数数据");
-    }
 
     /**
      * 根据参数编号获取详细信息

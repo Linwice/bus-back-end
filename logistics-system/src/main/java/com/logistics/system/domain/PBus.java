@@ -1,7 +1,7 @@
 package com.logistics.system.domain;
 
 import java.math.BigDecimal;
-import com.logistics.common.annotation.Excel;
+
 import com.logistics.common.core.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -20,23 +20,18 @@ public class PBus extends BaseEntity
     private Long id;
 
     /** 公交车编号 */
-    @Excel(name = "公交车编号")
     private String busNo;
 
     /** 线路信息 */
-    @Excel(name = "线路信息")
     private String line;
 
     /** 站点信息 */
-    @Excel(name = "站点信息")
     private String site;
 
     /** 线路详情信息 */
-    @Excel(name = "线路详情信息")
     private String lineDetail;
 
     /** 价格 */
-    @Excel(name = "价格")
     private BigDecimal price;
 
     public void setId(Long id) 

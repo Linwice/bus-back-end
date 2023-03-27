@@ -23,7 +23,6 @@ import com.logistics.common.core.domain.model.LoginUser;
 import com.logistics.common.core.page.TableDataInfo;
 import com.logistics.common.enums.BusinessType;
 import com.logistics.common.utils.StringUtils;
-import com.logistics.common.utils.poi.ExcelUtil;
 import com.logistics.framework.web.service.SysPermissionService;
 import com.logistics.framework.web.service.TokenService;
 import com.logistics.system.domain.SysUserRole;
@@ -58,16 +57,6 @@ public class SysRoleController extends BaseController
         startPage();
         List<SysRole> list = roleService.selectRoleList(role);
         return getDataTable(list);
-    }
-
-    @Log(title = "角色管理", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('system:role:export')")
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, SysRole role)
-    {
-        List<SysRole> list = roleService.selectRoleList(role);
-        ExcelUtil<SysRole> util = new ExcelUtil<SysRole>(SysRole.class);
-        util.exportExcel(response, list, "角色数据");
     }
 
     /**

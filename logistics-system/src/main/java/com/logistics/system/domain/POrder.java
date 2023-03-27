@@ -1,7 +1,7 @@
 package com.logistics.system.domain;
 
 import java.math.BigDecimal;
-import com.logistics.common.annotation.Excel;
+
 import com.logistics.common.core.domain.BaseEntity;
 import com.logistics.common.core.domain.entity.SysUser;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -21,15 +21,12 @@ public class POrder extends BaseEntity
     private Long id;
 
     /** 公交车ID */
-    @Excel(name = "公交车ID")
     private Long busId;
 
     /** 订票人ID */
-    @Excel(name = "订票人ID")
     private Long userId;
 
     /** 价格 */
-    @Excel(name = "价格")
     private BigDecimal orderPrice;
 
     private String orderNo;

@@ -21,7 +21,6 @@ import com.logistics.common.core.domain.entity.SysDictData;
 import com.logistics.common.core.page.TableDataInfo;
 import com.logistics.common.enums.BusinessType;
 import com.logistics.common.utils.StringUtils;
-import com.logistics.common.utils.poi.ExcelUtil;
 import com.logistics.system.service.ISysDictDataService;
 import com.logistics.system.service.ISysDictTypeService;
 
@@ -49,15 +48,7 @@ public class SysDictDataController extends BaseController
         return getDataTable(list);
     }
 
-    @Log(title = "字典数据", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('system:dict:export')")
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, SysDictData dictData)
-    {
-        List<SysDictData> list = dictDataService.selectDictDataList(dictData);
-        ExcelUtil<SysDictData> util = new ExcelUtil<SysDictData>(SysDictData.class);
-        util.exportExcel(response, list, "字典数据");
-    }
+
 
     /**
      * 查询字典数据详细

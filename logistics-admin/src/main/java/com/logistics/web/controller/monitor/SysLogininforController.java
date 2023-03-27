@@ -15,7 +15,6 @@ import com.logistics.common.core.controller.BaseController;
 import com.logistics.common.core.domain.AjaxResult;
 import com.logistics.common.core.page.TableDataInfo;
 import com.logistics.common.enums.BusinessType;
-import com.logistics.common.utils.poi.ExcelUtil;
 import com.logistics.system.domain.SysLogininfor;
 import com.logistics.system.service.ISysLogininforService;
 
@@ -40,15 +39,6 @@ public class SysLogininforController extends BaseController
         return getDataTable(list);
     }
 
-    @Log(title = "登录日志", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('monitor:logininfor:export')")
-    @PostMapping("/export")
-    public void export(HttpServletResponse response, SysLogininfor logininfor)
-    {
-        List<SysLogininfor> list = logininforService.selectLogininforList(logininfor);
-        ExcelUtil<SysLogininfor> util = new ExcelUtil<SysLogininfor>(SysLogininfor.class);
-        util.exportExcel(response, list, "登录日志");
-    }
 
     @PreAuthorize("@ss.hasPermi('monitor:logininfor:remove')")
     @Log(title = "登录日志", businessType = BusinessType.DELETE)
