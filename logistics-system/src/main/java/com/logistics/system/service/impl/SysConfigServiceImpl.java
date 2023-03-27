@@ -1,6 +1,5 @@
 package com.logistics.system.service.impl;
 
-import com.logistics.common.annotation.DataSource;
 import com.logistics.common.constant.Constants;
 import com.logistics.common.constant.UserConstants;
 import com.logistics.common.core.redis.RedisCache;
@@ -47,7 +46,6 @@ public class SysConfigServiceImpl implements ISysConfigService
      * @return 参数配置信息
      */
     @Override
-    @DataSource(DataSourceType.MASTER)
     public SysConfig selectConfigById(Long configId)
     {
         SysConfig config = new SysConfig();
