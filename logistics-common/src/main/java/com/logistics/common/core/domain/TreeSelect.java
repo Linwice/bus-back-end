@@ -9,7 +9,7 @@ import com.logistics.common.core.domain.entity.SysMenu;
 
 /**
  * Treeselect树结构实体类
- * 
+ *
  * @author 2891517520@qq.com
  */
 public class TreeSelect implements Serializable
