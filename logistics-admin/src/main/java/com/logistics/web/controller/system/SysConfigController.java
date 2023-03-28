@@ -24,7 +24,7 @@ import com.logistics.system.service.ISysConfigService;
 
 /**
  * 参数配置 信息操作处理
- * 
+ *
  * @author 2891517520@qq.com
  */
 @RestController
@@ -34,28 +34,28 @@ public class SysConfigController extends BaseController
     @Autowired
     private ISysConfigService configService;
 
-    /**
-     * 获取参数配置列表
-     */
-    @PreAuthorize("@ss.hasPermi('system:config:list')")
-    @GetMapping("/list")
-    public TableDataInfo list(SysConfig config)
-    {
-        startPage();
-        List<SysConfig> list = configService.selectConfigList(config);
-        return getDataTable(list);
-    }
-
-
-    /**
-     * 根据参数编号获取详细信息
-     */
-    @PreAuthorize("@ss.hasPermi('system:config:query')")
-    @GetMapping(value = "/{configId}")
-    public AjaxResult getInfo(@PathVariable Long configId)
-    {
-        return AjaxResult.success(configService.selectConfigById(configId));
-    }
+//    /**
+//     * 获取参数配置列表
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:config:list')")
+//    @GetMapping("/list")
+//    public TableDataInfo list(SysConfig config)
+//    {
+//        startPage();
+//        List<SysConfig> list = configService.selectConfigList(config);
+//        return getDataTable(list);
+//    }
+//
+//
+//    /**
+//     * 根据参数编号获取详细信息
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:config:query')")
+//    @GetMapping(value = "/{configId}")
+//    public AjaxResult getInfo(@PathVariable Long configId)
+//    {
+//        return AjaxResult.success(configService.selectConfigById(configId));
+//    }
 
     /**
      * 根据参数键名查询参数值
@@ -65,60 +65,60 @@ public class SysConfigController extends BaseController
     {
         return AjaxResult.success(configService.selectConfigByKey(configKey));
     }
-
-    /**
-     * 新增参数配置
-     */
-    @PreAuthorize("@ss.hasPermi('system:config:add')")
-    @Log(title = "参数管理", businessType = BusinessType.INSERT)
-    @PostMapping
-    public AjaxResult add(@Validated @RequestBody SysConfig config)
-    {
-        if (UserConstants.NOT_UNIQUE.equals(configService.checkConfigKeyUnique(config)))
-        {
-            return AjaxResult.error("新增参数'" + config.getConfigName() + "'失败，参数键名已存在");
-        }
-        config.setCreateBy(getUsername());
-        return toAjax(configService.insertConfig(config));
-    }
-
-    /**
-     * 修改参数配置
-     */
-    @PreAuthorize("@ss.hasPermi('system:config:edit')")
-    @Log(title = "参数管理", businessType = BusinessType.UPDATE)
-    @PutMapping
-    public AjaxResult edit(@Validated @RequestBody SysConfig config)
-    {
-        if (UserConstants.NOT_UNIQUE.equals(configService.checkConfigKeyUnique(config)))
-        {
-            return AjaxResult.error("修改参数'" + config.getConfigName() + "'失败，参数键名已存在");
-        }
-        config.setUpdateBy(getUsername());
-        return toAjax(configService.updateConfig(config));
-    }
-
-    /**
-     * 删除参数配置
-     */
-    @PreAuthorize("@ss.hasPermi('system:config:remove')")
-    @Log(title = "参数管理", businessType = BusinessType.DELETE)
-    @DeleteMapping("/{configIds}")
-    public AjaxResult remove(@PathVariable Long[] configIds)
-    {
-        configService.deleteConfigByIds(configIds);
-        return success();
-    }
-
-    /**
-     * 刷新参数缓存
-     */
-    @PreAuthorize("@ss.hasPermi('system:config:remove')")
-    @Log(title = "参数管理", businessType = BusinessType.CLEAN)
-    @DeleteMapping("/refreshCache")
-    public AjaxResult refreshCache()
-    {
-        configService.resetConfigCache();
-        return AjaxResult.success();
-    }
+//
+//    /**
+//     * 新增参数配置
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:config:add')")
+//    @Log(title = "参数管理", businessType = BusinessType.INSERT)
+//    @PostMapping
+//    public AjaxResult add(@Validated @RequestBody SysConfig config)
+//    {
+//        if (UserConstants.NOT_UNIQUE.equals(configService.checkConfigKeyUnique(config)))
+//        {
+//            return AjaxResult.error("新增参数'" + config.getConfigName() + "'失败，参数键名已存在");
+//        }
+//        config.setCreateBy(getUsername());
+//        return toAjax(configService.insertConfig(config));
+//    }
+//
+//    /**
+//     * 修改参数配置
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:config:edit')")
+//    @Log(title = "参数管理", businessType = BusinessType.UPDATE)
+//    @PutMapping
+//    public AjaxResult edit(@Validated @RequestBody SysConfig config)
+//    {
+//        if (UserConstants.NOT_UNIQUE.equals(configService.checkConfigKeyUnique(config)))
+//        {
+//            return AjaxResult.error("修改参数'" + config.getConfigName() + "'失败，参数键名已存在");
+//        }
+//        config.setUpdateBy(getUsername());
+//        return toAjax(configService.updateConfig(config));
+//    }
+//
+//    /**
+//     * 删除参数配置
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:config:remove')")
+//    @Log(title = "参数管理", businessType = BusinessType.DELETE)
+//    @DeleteMapping("/{configIds}")
+//    public AjaxResult remove(@PathVariable Long[] configIds)
+//    {
+//        configService.deleteConfigByIds(configIds);
+//        return success();
+//    }
+//
+//    /**
+//     * 刷新参数缓存
+//     */
+//    @PreAuthorize("@ss.hasPermi('system:config:remove')")
+//    @Log(title = "参数管理", businessType = BusinessType.CLEAN)
+//    @DeleteMapping("/refreshCache")
+//    public AjaxResult refreshCache()
+//    {
+//        configService.resetConfigCache();
+//        return AjaxResult.success();
+//    }
 }

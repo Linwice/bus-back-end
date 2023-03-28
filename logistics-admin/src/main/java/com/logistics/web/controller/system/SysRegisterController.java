@@ -33,9 +33,9 @@ public class SysRegisterController extends BaseController
         return StringUtils.isEmpty(msg) ? success() : error(msg);
     }
 
-    @PostMapping("/retrievePassword")
-    public AjaxResult retrievePassword(@RequestBody RetrievePasswordBody passwordBody)
-    {
-        return AjaxResult.success().put("flag",registerService.retrievePassword(passwordBody.getEmail()));
-    }
+//    @PostMapping("/retrievePassword")
+//    public AjaxResult retrievePassword(@RequestBody RetrievePasswordBody passwordBody)
+//    {
+//        return AjaxResult.success().put("flag",registerService.retrievePassword(passwordBody.getEmail()));
+//    }
 }

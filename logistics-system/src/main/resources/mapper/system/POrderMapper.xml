@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.logistics.system.mapper.POrderMapper">
-    
+
     <resultMap type="POrder" id="POrderResult">
         <result property="id"    column="id"    />
         <result property="busId"    column="bus_id"    />
@@ -60,21 +60,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectPOrderList" parameterType="POrder" resultMap="POrderResult">
         <include refid="selectPOrderVo"/>
-        <where>  
+        <where>
             <if test="busId != null "> and bus_id = #{busId}</if>
             <if test="orderNo != null and orderNo != ''"> and order_no like concat('%', #{orderNo}, '%')</if>
             <if test="status != null and status != ''"> and status = #{status}</if>
-            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="userId != null "> and p_order.user_id = #{userId}</if>
             <if test="keyWord != null and keyWord != ''"> and sys_user.user_name like concat('%', #{keyWord}, '%')</if>
             <if test="orderPrice != null "> and order_price = #{orderPrice}</if>
         </where>
     </select>
-    
+
     <select id="selectPOrderById" parameterType="Long" resultMap="POrderResult">
         <include refid="selectPOrderVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertPOrder" parameterType="POrder" useGeneratedKeys="true" keyProperty="id">
         insert into p_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -83,14 +83,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="orderPrice != null">order_price,</if>
             <if test="createTime != null">create_time,</if>
             <if test="orderNo != null and orderNo != ''">order_no,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="busId != null">#{busId},</if>
             <if test="userId != null">#{userId},</if>
             <if test="orderPrice != null">#{orderPrice},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="orderNo != null and orderNo != ''">#{orderNo},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updatePOrder" parameterType="POrder">
@@ -111,7 +111,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deletePOrderByIds" parameterType="String">
-        delete from p_order where id in 
+        delete from p_order where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
